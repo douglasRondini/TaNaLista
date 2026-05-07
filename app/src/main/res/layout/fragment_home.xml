@@ -201,7 +201,29 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     tools:listitem="@layout/item_list"
+                    tools:itemCount="2"
                     android:layout_marginTop="5dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/bg_borda_trastejada_raio_12"
+                    android:layout_margin="16dp"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Adicionar um item a lista"
+                        android:textSize="16sp"
+                        android:textColor="@color/green"
+                        android:textStyle="bold"
+                        android:drawableLeft="@drawable/ic_add_circle_outline"
+                        android:drawablePadding="5dp"/>
+
+                </LinearLayout>
 
 
             </LinearLayout>
