@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/linlayToolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="64dp"
         android:background="@drawable/bg_toolbar"
         android:gravity="center"
         android:elevation="5dp"
