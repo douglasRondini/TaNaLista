@@ -2,13 +2,19 @@ package com.douglasrondini.tanalista.di
 
 import androidx.room.Room
 import com.douglasrondini.tanalista.data.local.AppDatabase
+import com.douglasrondini.tanalista.data.repositoy.CategoryRepositoryImpl
 import com.douglasrondini.tanalista.data.repositoy.ItemRepositoryImpl
+import com.douglasrondini.tanalista.domain.repository.CategoryRepository
 import com.douglasrondini.tanalista.domain.repository.ItemRepository
 import com.douglasrondini.tanalista.domain.usecases.DeletItemUseCase
+import com.douglasrondini.tanalista.domain.usecases.GetAllCategoriesUseCase
 import com.douglasrondini.tanalista.domain.usecases.GetAllItensUseCase
 import com.douglasrondini.tanalista.domain.usecases.GetItemByCategoryUseCase
+import com.douglasrondini.tanalista.domain.usecases.InsertCategoryUseCase
 import com.douglasrondini.tanalista.domain.usecases.InsertItemUseCase
+import com.douglasrondini.tanalista.ui.register.ProductRegistrationViewModel
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 
@@ -21,21 +27,27 @@ val databaseModule = module {
             ).build()
         }
         single { get<AppDatabase>().itemDao() }
+        single { get<AppDatabase>().categoryDao() }
     }
 
 val  repositoryModule = module {
     single<ItemRepository> { ItemRepositoryImpl(get()) }
+    single<CategoryRepository> { CategoryRepositoryImpl(get()) }
 }
 
 val useCaseModule = module {
+    // itens lista
     factory { GetItemByCategoryUseCase(get()) }
     factory { InsertItemUseCase(get()) }
     factory { DeletItemUseCase(get()) }
     factory { GetAllItensUseCase(get()) }
+    // categorias
+    factory { GetAllCategoriesUseCase(get()) }
+    factory { InsertCategoryUseCase(get()) }
 }
 
 val viewModelModule = module {
-
+    viewModel { ProductRegistrationViewModel(get()) }
 }
 
 val appModules = listOf(
