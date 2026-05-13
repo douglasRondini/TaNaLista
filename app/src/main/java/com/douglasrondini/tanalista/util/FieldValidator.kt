@@ -31,10 +31,10 @@ object FieldValidator {
     }
 
     fun validatePrice(priceText: String?): ValidationResult {
-        val normalized = priceText?.replace(",",".")
-        val price = normalized?.toDoubleOrNull()
+        val normalized = priceText?.replace(",",".")?.trim()
+        val price = normalized?.toDoubleOrNull() ?: 0.0
 
-        return if (price == null || price < 0.0) {
+        return if ( price < 0.0) {
             ValidationResult.Error("Preço Inválido")
         } else {
             ValidationResult.Success
