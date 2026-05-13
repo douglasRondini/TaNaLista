@@ -62,4 +62,9 @@ class ProductRegistrationViewModel(
         }
     }
 
+    fun clearInsertState() {
+        _insertState.value = null
+    }
+
+
 }

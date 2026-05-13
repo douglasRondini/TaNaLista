@@ -131,6 +131,7 @@ class ProductRegistrationFragment : Fragment() {
                                 "Produto cadastrado com sucesso!",
                                 Snackbar.LENGTH_LONG
                             ).show()
+                            viewModel.clearInsertState()
                         } else {
                             Snackbar.make(
                                 binding.root,
