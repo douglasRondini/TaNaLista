@@ -115,6 +115,15 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.totalPrice.collect { total ->
+                    val currencyFormat = NumberFormat.getCurrencyInstance(Locale("pt", "BR"))
+                    binding.txtPriceComp.text = currencyFormat.format(total)
+                }
+            }
+        }
     }
 
     private fun showPriceDialog(item: Item) {

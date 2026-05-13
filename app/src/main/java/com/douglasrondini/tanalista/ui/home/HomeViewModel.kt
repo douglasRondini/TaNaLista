@@ -31,6 +31,9 @@ class HomeViewModel(
     private val _errorState = MutableStateFlow<String?>(null)
     val errorState: StateFlow<String?> = _errorState
 
+    private val _totalPrice = MutableStateFlow(0.0)
+    val totalPrice: StateFlow<Double> = _totalPrice
+
 
     fun loadCategories() {
         viewModelScope.launch {
@@ -54,8 +57,13 @@ class HomeViewModel(
 
     fun loadAllItems() {
         viewModelScope.launch {
-            getAllItensUseCase().collect { result ->
-                _items.value = result
+            try {
+                getAllItensUseCase().collect { result ->
+                    _items.value = result
+                    calculateTotal(result)
+                }
+            } catch (e: Exception) {
+                _errorState.value = e.message
             }
         }
     }
@@ -78,6 +86,11 @@ class HomeViewModel(
                 _errorState.value = e.message
             }
         }
+    }
+
+    fun calculateTotal(items: List<Item>) {
+        val total = items.sumOf { it.price * it.quantity }
+        _totalPrice.value = total
     }
 
 
