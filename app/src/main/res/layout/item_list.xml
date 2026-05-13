@@ -31,6 +31,7 @@
                 android:src="@drawable/img_item"/>
 
             <TextView
+                android:id="@+id/txtItemName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Maçã"
@@ -68,6 +69,7 @@
                     android:textSize="16sp"
                     android:textColor="@color/black"/>
                 <TextView
+                    android:id="@+id/txtitemQuantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -85,6 +87,7 @@
             </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtItemPrice"
                 android:layout_width="92dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

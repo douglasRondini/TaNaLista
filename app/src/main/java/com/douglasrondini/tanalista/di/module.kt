@@ -74,7 +74,7 @@ val useCaseModule = module {
 
 val viewModelModule = module {
     viewModel { ProductRegistrationViewModel(get(),get(), get()) }
-    viewModel { HomeViewModel(get()) }
+    viewModel { HomeViewModel(get(),get(),get()) }
 }
 
 val appModules = listOf(

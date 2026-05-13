@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.douglasrondini.tanalista.R
 import com.douglasrondini.tanalista.databinding.FragmentHomeBinding
 import com.douglasrondini.tanalista.ui.home.adapter.CategoryAdapter
+import com.douglasrondini.tanalista.ui.home.adapter.ItemAdapter
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,6 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var itemAdapter: ItemAdapter
     private val viewModel: HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +41,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.loadCategories()
+        viewModel.loadAllItems()
         setUp()
         observSetUp()
 
@@ -48,11 +51,19 @@ class HomeFragment : Fragment() {
         categoryAdapter = CategoryAdapter(emptyList()) { category ->
             //add logica para atualizar a lista de itns por categoria
             binding.txtTitleList2.text = category.name
+            viewModel.lodItemsByCategory(category.name)
             Toast.makeText(requireContext(), "Categoria: ${category.name}", Toast.LENGTH_SHORT).show()
         }
         binding.rvCategorias.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = categoryAdapter
+        }
+
+        itemAdapter = ItemAdapter(emptyList())
+
+        binding.rvListItens.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = itemAdapter
         }
     }
 
@@ -64,9 +75,13 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.items.collect { items ->
+                    itemAdapter.updateData(items)
+                }
+            }
+        }
     }
-
-
-
-
 }

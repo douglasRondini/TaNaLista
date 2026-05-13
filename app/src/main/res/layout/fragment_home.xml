@@ -114,8 +114,7 @@
                         android:layout_margin="8dp">
 
                         <TextView
-
-
+                            android:id="@+id/txtTitleCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="PRÓXIMA COMPRA"
@@ -127,7 +126,7 @@
                             android:layout_height="wrap_content"
                             android:text="Sábado, 14 Out"
                             android:textColor="@color/white"
-                            android:layout_below="@id/txtTitleList2"
+                            android:layout_below="@id/txtTitleCard"
                             android:textSize="24sp"
                             android:textStyle="bold"/>
 
@@ -177,7 +176,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Frutas e Legumes"
+                        android:text="Lista de Compras"
                         android:drawableLeft="@drawable/ic_frutoslegumes"
                         android:drawablePadding="5dp"
                         android:textSize="18sp"
@@ -198,6 +197,7 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvListItens"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
