@@ -10,6 +10,7 @@ import com.douglasrondini.tanalista.data.repositoy.ItemRepositoryImpl
 import com.douglasrondini.tanalista.domain.repository.CategoryRepository
 import com.douglasrondini.tanalista.domain.repository.ItemRepository
 import com.douglasrondini.tanalista.domain.usecases.DeletItemUseCase
+import com.douglasrondini.tanalista.domain.usecases.DeleteAllItemsUseCase
 import com.douglasrondini.tanalista.domain.usecases.GetAllCategoriesUseCase
 import com.douglasrondini.tanalista.domain.usecases.GetAllItensUseCase
 import com.douglasrondini.tanalista.domain.usecases.GetItemByCategoryUseCase
@@ -69,6 +70,7 @@ val useCaseModule = module {
     factory { DeletItemUseCase(get()) }
     factory { UpdateItemUseCase(get()) }
     factory { GetAllItensUseCase(get()) }
+    factory { DeleteAllItemsUseCase(get()) }
     // categorias
     factory { GetAllCategoriesUseCase(get()) }
     factory { InsertCategoryUseCase(get()) }
@@ -76,7 +78,7 @@ val useCaseModule = module {
 
 val viewModelModule = module {
     viewModel { ProductRegistrationViewModel(get(),get(), get()) }
-    viewModel { HomeViewModel(get(),get(),get(),get(),get()) }
+    viewModel { HomeViewModel(get(),get(),get(),get(),get(),get()) }
 }
 
 val appModules = listOf(

@@ -97,6 +97,18 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = itemAdapter
         }
+
+        binding.fabNewList.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Nova lista")
+                .setMessage("Deseja excluir todos os itens e começar uma nova lista?")
+                .setPositiveButton("Sim") { _, _ ->
+                    viewModel.deleteAllItems()
+                    Toast.makeText(requireContext(), "Lista reiniciada!", Toast.LENGTH_SHORT).show()
+                }
+                .setNegativeButton("Cancelar", null)
+                .show()
+        }
     }
 
     private fun observSetUp() {

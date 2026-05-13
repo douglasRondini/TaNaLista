@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.douglasrondini.tanalista.domain.model.Category
 import com.douglasrondini.tanalista.domain.model.Item
 import com.douglasrondini.tanalista.domain.usecases.DeletItemUseCase
+import com.douglasrondini.tanalista.domain.usecases.DeleteAllItemsUseCase
 import com.douglasrondini.tanalista.domain.usecases.GetAllCategoriesUseCase
 import com.douglasrondini.tanalista.domain.usecases.GetAllItensUseCase
 import com.douglasrondini.tanalista.domain.usecases.GetItemByCategoryUseCase
@@ -18,7 +19,8 @@ class HomeViewModel(
     private val getAllItensUseCase: GetAllItensUseCase,
     private val getItemByCategoryUseCase: GetItemByCategoryUseCase,
     private val updateItemUseCase: UpdateItemUseCase,
-    private val deleteItemUseCase: DeletItemUseCase
+    private val deleteItemUseCase: DeletItemUseCase,
+    private val deleteAllItemsUseCase: DeleteAllItemsUseCase
 
 ): ViewModel() {
 
@@ -105,6 +107,19 @@ class HomeViewModel(
     private fun calculateQuantity(items: List<Item>) {
         val total = items.sumOf { it.quantity }
         _totalQuantity.value = total
+    }
+
+    fun deleteAllItems() {
+        viewModelScope.launch {
+            try {
+                deleteAllItemsUseCase()
+                _items.value = emptyList()
+                _totalPrice.value = 0.0
+                _totalQuantity.value = 0
+            }catch (e: Exception) {
+                _errorState.value = e.message
+            }
+        }
     }
 
 

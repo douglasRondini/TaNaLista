@@ -231,8 +231,19 @@
 
             </LinearLayout>
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabNewList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="24dp"
+                android:src="@drawable/ic_playlist_add"
+                app:backgroundTint="@color/green"
+                app:tint="@color/white"/>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
 
 
 
