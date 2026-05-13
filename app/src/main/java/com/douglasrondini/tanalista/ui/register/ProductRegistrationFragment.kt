@@ -42,9 +42,12 @@ class ProductRegistrationFragment : Fragment() {
         loadCategories()
         setUp()
         observeInsertItem()
+        setUpQuantityButtons()
     }
 
     fun setUp() {
+
+
         binding.btnRegister.setOnClickListener {
             val name = binding.edtName.text?.toString()?.trim()
             val category = binding.spnCategory.selectedItem?.toString()
@@ -95,6 +98,25 @@ class ProductRegistrationFragment : Fragment() {
             viewModel.insertItem(item)
         }
     }
+
+    private fun setUpQuantityButtons() {
+        var quantity = 1
+        binding.txtQuantity.text = quantity.toString()
+
+        binding.btnPlus.setOnClickListener {
+            quantity++
+            binding.txtQuantity.text = quantity.toString()
+        }
+
+        binding.btnLess.setOnClickListener {
+            if (quantity > 1) {
+                quantity--
+                binding.txtQuantity.text = quantity.toString()
+            }
+        }
+
+    }
+
 
 
     private fun observeInsertItem() {

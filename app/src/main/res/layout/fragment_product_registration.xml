@@ -167,6 +167,7 @@
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_less"
                             android:layout_width="21dp"
                             android:layout_height="21dp"
                             android:background="@drawable/bg_fundo_opaco_oval"
@@ -184,6 +185,7 @@
                             android:textColor="@color/green"
                             android:textStyle="bold"/>
                         <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_plus"
                             android:layout_width="21dp"
                             android:layout_height="21dp"
                             android:background="@drawable/bg_fundo_green_raio_9"
