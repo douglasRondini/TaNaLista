@@ -5,11 +5,11 @@ import com.douglasrondini.tanalista.di.appModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 
-class myApp : Application(){
+class MyApp : Application(){
     override fun onCreate() {
         super.onCreate()
         startKoin {
-            androidContext(this@myApp)
+            androidContext(this@MyApp)
             modules(appModules)
         }
     }
