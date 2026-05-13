@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -14,6 +15,9 @@ interface ItemDao {
 
     @Delete
     suspend fun deletItem(item: ItemEntity)
+
+    @Update
+    suspend fun updateItem(item: ItemEntity)
 
     @Query("SELECT * FROM item_table WHERE category = :category")
     fun getItemsByCategory(category: String): Flow<List<ItemEntity>>

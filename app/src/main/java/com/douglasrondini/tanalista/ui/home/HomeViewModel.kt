@@ -4,9 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.douglasrondini.tanalista.domain.model.Category
 import com.douglasrondini.tanalista.domain.model.Item
+import com.douglasrondini.tanalista.domain.usecases.DeletItemUseCase
 import com.douglasrondini.tanalista.domain.usecases.GetAllCategoriesUseCase
 import com.douglasrondini.tanalista.domain.usecases.GetAllItensUseCase
 import com.douglasrondini.tanalista.domain.usecases.GetItemByCategoryUseCase
+import com.douglasrondini.tanalista.domain.usecases.UpdateItemUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -14,7 +16,9 @@ import kotlinx.coroutines.launch
 class HomeViewModel(
     private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val getAllItensUseCase: GetAllItensUseCase,
-    private val getItemByCategoryUseCase: GetItemByCategoryUseCase
+    private val getItemByCategoryUseCase: GetItemByCategoryUseCase,
+    private val updateItemUseCase: UpdateItemUseCase,
+    private val deleteItemUseCase: DeletItemUseCase
 
 ): ViewModel() {
 
@@ -55,6 +59,27 @@ class HomeViewModel(
             }
         }
     }
+
+    fun updateItem(item: Item) {
+        viewModelScope.launch {
+            try {
+                updateItemUseCase(item)
+            } catch (e: Exception) {
+                _errorState.value = e.message
+            }
+        }
+    }
+
+    fun deleteItem(item: Item) {
+        viewModelScope.launch {
+            try {
+                deleteItemUseCase(item)
+            } catch (e: Exception) {
+                _errorState.value = e.message
+            }
+        }
+    }
+
 
 
 }

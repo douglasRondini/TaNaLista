@@ -24,5 +24,6 @@ class ItemRepositoryImpl(private val dao: ItemDao): ItemRepository {
     override suspend fun insertItem(item: Item) = dao.insertItem(item.toEntity())
 
     override suspend fun deleteItem(item: Item) = dao.deletItem(item.toEntity())
+    override suspend fun updateItem(item: Item) = dao.updateItem(item.toEntity())
 
 }

@@ -1,14 +1,23 @@
 package com.douglasrondini.tanalista.ui.home.adapter
 
 import android.annotation.SuppressLint
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.douglasrondini.tanalista.databinding.ItemListBinding
 import com.douglasrondini.tanalista.domain.model.Item
+import java.text.NumberFormat
+import java.util.Locale
 
 class ItemAdapter(
-    private var items: List<Item>
+    private var items: List<Item>,
+    private val onPlusClick: (Item) -> Unit,
+    private val onLessClick: (Item) -> Unit,
+    private val onDeleteClick: (Item) -> Unit,
+    private val onCheckedChange: (Item, Boolean) -> Unit,
+    private val onPriceClick: (Item) -> Unit
 ): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
 
@@ -43,8 +52,19 @@ class ItemAdapter(
         fun bind(item: Item) {
             binding.txtItemName.text = item.name
             binding.txtitemQuantity.text = item.quantity.toString()
-            binding.edtItemPrice.setText("R$ ${item.price}")
+            binding.checkbox.isChecked = item.checked
+            binding.txtItemPrice.text = "R$ %.2f".format(item.price)
+            // Botões
+            binding.btnPlus.setOnClickListener { onPlusClick(item) }
+            binding.btnLess.setOnClickListener { onLessClick(item) }
+            binding.btnDelet.setOnClickListener { onDeleteClick(item) }
+            binding.checkbox.setOnCheckedChangeListener { _, isChecked -> onCheckedChange(item, isChecked) }
+            binding.txtItemPrice.setOnClickListener { onPriceClick(item) }
+
+
         }
+
+
     }
 
 
