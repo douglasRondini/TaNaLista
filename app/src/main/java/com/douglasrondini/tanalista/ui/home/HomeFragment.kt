@@ -124,6 +124,14 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.totalQuantity.collect { total ->
+                    binding.txtQuantityItem.text = "$total itens"
+                }
+            }
+        }
     }
 
     private fun showPriceDialog(item: Item) {
