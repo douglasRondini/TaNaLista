@@ -125,6 +125,7 @@ class ProductRegistrationFragment : Fragment() {
                 viewModel.insertState.collect { success ->
                     success?.let {
                         if (it) {
+                            clearFields()
                             Snackbar.make(
                                 binding.root,
                                 "Produto cadastrado com sucesso!",
@@ -159,6 +160,15 @@ class ProductRegistrationFragment : Fragment() {
                     binding.spnCategory.adapter = adapter
                 }
             }
+        }
+    }
+
+    private fun clearFields() {
+        with(binding) {
+            edtName.text?.clear()
+            spnCategory.setSelection(0)
+            txtQuantity.text = "1"
+            edtPrice.text?.clear()
         }
     }
 
