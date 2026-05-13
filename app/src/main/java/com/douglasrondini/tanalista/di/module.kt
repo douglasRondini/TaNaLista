@@ -15,6 +15,7 @@ import com.douglasrondini.tanalista.domain.usecases.GetAllItensUseCase
 import com.douglasrondini.tanalista.domain.usecases.GetItemByCategoryUseCase
 import com.douglasrondini.tanalista.domain.usecases.InsertCategoryUseCase
 import com.douglasrondini.tanalista.domain.usecases.InsertItemUseCase
+import com.douglasrondini.tanalista.ui.home.HomeViewModel
 import com.douglasrondini.tanalista.ui.register.ProductRegistrationViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -73,6 +74,7 @@ val useCaseModule = module {
 
 val viewModelModule = module {
     viewModel { ProductRegistrationViewModel(get(),get(), get()) }
+    viewModel { HomeViewModel(get()) }
 }
 
 val appModules = listOf(

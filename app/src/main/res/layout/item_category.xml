@@ -17,8 +17,11 @@
         android:src="@drawable/ic_comp_basic"
         />
     <TextView
-        android:layout_width="50dp"
+        android:id="@+id/txtCategory"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:maxLines="1"
         android:gravity="center"
         android:text="Compra basica"
         android:textSize="13sp"
