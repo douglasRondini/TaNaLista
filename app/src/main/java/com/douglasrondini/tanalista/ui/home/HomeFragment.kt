@@ -56,10 +56,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUp() {
-        categoryAdapter = CategoryAdapter(emptyList()) { category ->
+        categoryAdapter = CategoryAdapter { category ->
             //add logica para atualizar a lista de itns por categoria
             binding.txtTitleList2.text = category.name
-            viewModel.lodItemsByCategory(category.name)
+            viewModel.loadItemsByCategory(category.name)
             Toast.makeText(requireContext(), "Categoria: ${category.name}", Toast.LENGTH_SHORT)
                 .show()
         }
@@ -70,7 +70,6 @@ class HomeFragment : Fragment() {
         }
 
         itemAdapter = ItemAdapter(
-            emptyList(),
             onPlusClick = { item ->
                 val updated = item.copy(quantity = item.quantity + 1)
                 viewModel.updateItem(updated)
@@ -88,7 +87,7 @@ class HomeFragment : Fragment() {
                 val updated = item.copy(checked = isChecked)
                 viewModel.updateItem(updated)
             },
-            onPriceClick = {item ->
+            onPriceClick = { item ->
                 showPriceDialog(item)
             }
         )
@@ -115,7 +114,7 @@ class HomeFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.categories.collect { categories ->
-                    categoryAdapter.updateData(categories)
+                    categoryAdapter.submitList(categories)
                 }
             }
         }
@@ -123,7 +122,7 @@ class HomeFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.items.collect { items ->
-                    itemAdapter.updateData(items)
+                    itemAdapter.submitList(items)
                 }
             }
         }

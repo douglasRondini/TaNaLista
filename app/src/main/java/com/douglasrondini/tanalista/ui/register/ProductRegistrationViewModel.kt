@@ -54,8 +54,6 @@ class ProductRegistrationViewModel(
         viewModelScope.launch {
             try {
                 insertCategoryUseCase(Category(name = name))
-
-                loadCategories()
             } catch (e: Exception) {
                 _errorState.value = e.message
             }

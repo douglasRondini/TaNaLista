@@ -1,4 +1,4 @@
-package com.douglasrondini.tanalista.data.repositoy
+package com.douglasrondini.tanalista.data.repository
 
 import com.douglasrondini.tanalista.data.local.CategoryDao
 import com.douglasrondini.tanalista.domain.model.Category

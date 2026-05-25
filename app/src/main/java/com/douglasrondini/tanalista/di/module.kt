@@ -5,8 +5,8 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.douglasrondini.tanalista.data.local.AppDatabase
 import com.douglasrondini.tanalista.data.local.CategoryEntity
-import com.douglasrondini.tanalista.data.repositoy.CategoryRepositoryImpl
-import com.douglasrondini.tanalista.data.repositoy.ItemRepositoryImpl
+import com.douglasrondini.tanalista.data.repository.CategoryRepositoryImpl
+import com.douglasrondini.tanalista.data.repository.ItemRepositoryImpl
 import com.douglasrondini.tanalista.domain.repository.CategoryRepository
 import com.douglasrondini.tanalista.domain.repository.ItemRepository
 import com.douglasrondini.tanalista.domain.usecases.DeletItemUseCase

@@ -40,6 +40,8 @@ class HomeViewModel(
     val totalQuantity: StateFlow<Int> = _totalQuantity
 
 
+    private var itemsJob: kotlinx.coroutines.Job? = null
+
     fun loadCategories() {
         viewModelScope.launch {
             try {
@@ -52,11 +54,13 @@ class HomeViewModel(
         }
     }
 
-    fun lodItemsByCategory(categoryName: String) {
-        viewModelScope.launch {
+    fun loadItemsByCategory(categoryName: String) {
+        itemsJob?.cancel()
+        itemsJob = viewModelScope.launch {
             try {
                 getItemByCategoryUseCase(categoryName).collect { result ->
                     _items.value = result
+                    calculateTotal(result)
                     calculateQuantity(result)
                 }
             }catch (e: Exception) {
@@ -66,7 +70,8 @@ class HomeViewModel(
     }
 
     fun loadAllItems() {
-        viewModelScope.launch {
+        itemsJob?.cancel()
+        itemsJob = viewModelScope.launch {
             try {
                 getAllItensUseCase().collect { result ->
                     _items.value = result
